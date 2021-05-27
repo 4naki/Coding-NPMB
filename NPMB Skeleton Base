@@ -1,0 +1,472 @@
+@name mechdat/npmb/skeleton
+@inputs Seat:entity HitPos:vector Boost Fly
+@outputs CamPos:vector [Base Neck_Base R_Arm_con L_Arm_con Neck Head R_up_arm L_up_arm R_f_arm L_f_arm R_hand L_hand Pelvis]:entity Show Val2Overwrite ShowGuns
+@persist X Y Max
+
+#model parts
+@inputs [RSegA RSegB RSegC RFoot]:entity [LSegA LSegB LSegC LFoot]:entity
+
+#everything else
+@persist [Col1 Col2 Col3 Col4]:vector [Base Neck_Base R_Arm_con L_Arm_con Neck Head R_up_arm L_up_arm R_f_arm L_f_arm R_hand L_hand Pelvis]:entity MatDef:string IntVal IntVal2 Val2Overwrite ShowGuns Show
+if(first()){
+    
+    Show=1
+    
+    ShowGuns=1
+    
+    Val2Overwrite=1500 #1500 def some servers allow faster holo loading time
+    
+    #Base to Neck Base
+    holoCreate(1)
+    holoCreate(2)
+    holoCreate(3)
+    holoCreate(4)
+    #arm connectors
+    holoCreate(5)
+    holoCreate(6)
+    holoCreate(7)
+    holoCreate(8)
+    
+    holoCreate(9)
+    holoCreate(10)
+    holoCreate(11)
+    holoCreate(12)
+    
+    holoCreate(13)
+    holoCreate(14)
+    holoCreate(15)
+    holoCreate(16)
+    
+    holoCreate(17)
+    holoCreate(18)
+    holoCreate(19)
+    holoCreate(20)
+    #hands
+    holoCreate(21)
+    holoCreate(22)
+    holoCreate(23)
+    holoCreate(24)
+    holoCreate(3000)
+    holoAlpha(1, 255*Show)
+    holoAlpha(2, 255*Show)
+    holoAlpha(3, 255*Show)
+    holoAlpha(4, 255*Show)
+    holoAlpha(5, 255*Show)
+    holoAlpha(6, 255*Show)
+    holoAlpha(7, 255*Show)
+    holoAlpha(8, 255*Show)
+    holoAlpha(9, 255*Show)
+    holoAlpha(10, 255*Show)
+    holoAlpha(11, 255*Show)
+    holoAlpha(12, 255*Show)
+    holoAlpha(13, 255*Show)
+    holoAlpha(14, 255*Show)
+    holoAlpha(15, 255*Show)
+    holoAlpha(16, 255*Show)
+    holoAlpha(17, 255*Show)
+    holoAlpha(18, 255*Show)
+    holoAlpha(19, 255*Show)
+    holoAlpha(20, 255*Show)
+    holoAlpha(21, 255*Show)
+    holoAlpha(22, 255*Show)
+    holoAlpha(23, 255*Show)
+    holoAlpha(24, 255*Show)
+    holoAlpha(3000, 255*Show)
+    
+    SkelMat="models/debug/debugwhite"
+    
+    JointScale=vec(0.6)*0.6
+    JointModel="models/sprops/geometry/sphere_18.mdl"
+    JointColor=vec(0,0,255)
+    
+    BoneScale=vec(0.3,0.3,1)*0.6
+    BoneModel=""
+    BoneColor=vec(255,255,0)    
+    
+    holoScale(1, JointScale)
+    holoPos(1, Seat:toWorld(vec(0,0,12)))
+    holoAng(1, Seat:toWorld(ang(0,0,12)))
+    holoModel(1, JointModel)
+    holoMaterial(1, SkelMat)
+    holoColor(1, JointColor)
+    holoDisableShading(1, 1)
+    holoParent(1, Seat)
+    
+    holoScale(2, BoneScale)
+    holoPos(2, holoEntity(1):toWorld(vec(0,0,10)))
+    holoAng(2, holoEntity(1):toWorld(ang(0,0,0)))
+    holoModel(2, BoneModel)
+    holoMaterial(2, SkelMat)
+    holoColor(2, BoneColor)
+    holoDisableShading(2, 1)
+    holoParent(2, 1)
+    
+    holoScale(3, JointScale)
+    holoPos(3, holoEntity(1):toWorld(vec(0,0,25)))
+    holoAng(3, holoEntity(1):toWorld(ang(0,0,-12-15)))
+    holoModel(3, JointModel)
+    holoMaterial(3, SkelMat)
+    holoColor(3, JointColor)
+    holoDisableShading(3, 1)
+    holoParent(3, 1)
+    
+    holoScale(4, BoneScale)
+    holoPos(4, holoEntity(3):toWorld(vec(0,0,10)))
+    holoAng(4, holoEntity(3):toWorld(ang(0,0,0)))
+    holoModel(4, BoneModel)
+    holoMaterial(4, SkelMat)
+    holoColor(4, BoneColor)
+    holoDisableShading(4, 1)
+    holoParent(4, 3)
+    
+    #arm connectors
+    
+    holoScale(5, JointScale)
+    holoPos(5, holoEntity(3):toWorld(vec(20,-11,20)))
+    holoAng(5, holoEntity(3):toWorld(ang(55,0,15)))
+    holoModel(5, JointModel)
+    holoMaterial(5, SkelMat)
+    holoColor(5, JointColor)
+    holoDisableShading(5, 1)
+    holoParent(5, 3)
+    
+    holoScale(6, BoneScale)
+    holoPos(6, holoEntity(5):toWorld(vec(0,0,10)))
+    holoAng(6, holoEntity(5):toWorld(ang(0,0,0)))
+    holoModel(6, BoneModel)
+    holoMaterial(6, SkelMat)
+    holoColor(6, BoneColor)
+    holoDisableShading(6, 1)
+    holoParent(6, 5)
+    
+    holoScale(7, JointScale)
+    holoPos(7, holoEntity(3):toWorld(vec(-20,-11,20)))
+    holoAng(7, holoEntity(3):toWorld(ang(-55,0,15)))
+    holoModel(7, JointModel)
+    holoMaterial(7, SkelMat)
+    holoColor(7, JointColor)
+    holoDisableShading(7, 1)
+    holoParent(7, 4)
+    
+    holoScale(8, BoneScale)
+    holoPos(8, holoEntity(7):toWorld(vec(0,0,10)))
+    holoAng(8, holoEntity(7):toWorld(ang(0,0,0)))
+    holoModel(8, BoneModel)
+    holoMaterial(8, SkelMat)
+    holoColor(8, BoneColor)
+    holoDisableShading(8, 1)
+    holoParent(8, 7)
+    
+    
+    holoScale(9, JointScale)
+    holoPos(9, holoEntity(3):toWorld(vec(0,15,15)))
+    holoAng(9, holoEntity(3):toWorld(ang(0,0,-5)))
+    holoModel(9, JointModel)
+    holoMaterial(9, SkelMat)
+    holoColor(9, JointColor)
+    holoDisableShading(9, 1)
+    holoParent(9, 3)
+    
+    holoScale(10, BoneScale)
+    holoPos(10, holoEntity(9):toWorld(vec(0,0,10)))
+    holoAng(10, holoEntity(9):toWorld(ang(0,0,0)))
+    holoModel(10, BoneModel)
+    holoMaterial(10, SkelMat)
+    holoColor(10, BoneColor)
+    holoDisableShading(10, 1)
+    holoParent(10, 9)
+    
+    holoScale(11, JointScale)
+    holoPos(11, holoEntity(9):toWorld(vec(0,0,12)))
+    holoModel(11, JointModel)
+    holoMaterial(11, SkelMat)
+    holoColor(11, JointColor)
+    holoDisableShading(11, 1)
+    holoParent(11, 9)
+    
+    holoScale(12, BoneScale)
+    holoPos(12, holoEntity(11):toWorld(vec(0,0,10)))
+    holoAng(12, holoEntity(11):toWorld(ang(0,0,0)))
+    holoModel(12, BoneModel)
+    holoMaterial(12, SkelMat)
+    holoColor(12, BoneColor)
+    holoDisableShading(12, 1)
+    holoParent(12, 11)
+    
+    #Arms
+    
+    holoScale(13, JointScale)
+    holoPos(13, holoEntity(5):toWorld(vec(0,0,25)))
+    holoAng(13, holoEntity(5):toWorld(ang(110,0,10)))
+    holoModel(13, JointModel)
+    holoMaterial(13, SkelMat)
+    holoColor(13, JointColor)
+    holoDisableShading(13, 1)
+    holoParent(13, 9)
+    
+    holoScale(14, BoneScale)
+    holoPos(14, holoEntity(13):toWorld(vec(0,0,10)))
+    holoAng(14, holoEntity(13):toWorld(ang(0,0,0)))
+    holoModel(14, BoneModel)
+    holoMaterial(14, SkelMat)
+    holoColor(14, BoneColor)
+    holoDisableShading(14, 1)
+    holoParent(14, 13)
+    
+    holoScale(15, JointScale)
+    holoPos(15, holoEntity(7):toWorld(vec(0,0,25)))
+    holoAng(15, holoEntity(7):toWorld(ang(-110,0,10)))
+    holoModel(15, JointModel)
+    holoMaterial(15, SkelMat)
+    holoColor(15, JointColor)
+    holoDisableShading(15, 1)
+    holoParent(15, 9)
+    
+    holoScale(16, BoneScale)
+    holoPos(16, holoEntity(15):toWorld(vec(0,0,10)))
+    holoAng(16, holoEntity(15):toWorld(ang(0,0,0)))
+    holoModel(16, BoneModel)
+    holoMaterial(16, SkelMat)
+    holoColor(16, BoneColor)
+    holoDisableShading(16, 1)
+    holoParent(16, 15)
+    
+    #forearms
+    
+    holoScale(17, JointScale)
+    holoPos(17, holoEntity(13):toWorld(vec(0,0,30)))
+    holoAng(17, holoEntity(13):toWorld(ang(0,0,-45)))
+    holoModel(17, JointModel)
+    holoMaterial(17, SkelMat)
+    holoColor(17, JointColor)
+    holoDisableShading(17, 1)
+    holoParent(17, 13)
+    
+    holoScale(18, BoneScale)
+    holoPos(18, holoEntity(17):toWorld(vec(0,0,10)))
+    holoAng(18, holoEntity(17):toWorld(ang(0,0,0)))
+    holoModel(18, BoneModel)
+    holoMaterial(18, SkelMat)
+    holoColor(18, BoneColor)
+    holoDisableShading(18, 1)
+    holoParent(18, 17)
+    
+    holoScale(19, JointScale)
+    holoPos(19, holoEntity(15):toWorld(vec(0,0,30)))
+    holoAng(19, holoEntity(15):toWorld(ang(0,0,-45)))
+    holoModel(19, JointModel)
+    holoMaterial(19, SkelMat)
+    holoColor(19, JointColor)
+    holoDisableShading(19, 1)
+    holoParent(19, 15)
+    
+    holoScale(20, BoneScale)
+    holoPos(20, holoEntity(19):toWorld(vec(0,0,10)))
+    holoAng(20, holoEntity(19):toWorld(ang(0,0,0)))
+    holoModel(20, BoneModel)
+    holoMaterial(20, SkelMat)
+    holoColor(20, BoneColor)
+    holoDisableShading(20, 1)
+    holoParent(20, 19)
+    
+    #hands
+    
+    holoScale(21, JointScale)
+    holoPos(21, holoEntity(17):toWorld(vec(0,0,45)))
+    holoAng(21, holoEntity(17):toWorld(ang(0,0,-5)))
+    holoModel(21, JointModel)
+    holoMaterial(21, SkelMat)
+    holoColor(21, JointColor)
+    holoDisableShading(21, 1)
+    holoParent(21, 17)
+    
+    holoScale(22, BoneScale)
+    holoPos(22, holoEntity(21):toWorld(vec(0,0,10)))
+    holoAng(22, holoEntity(21):toWorld(ang(0,0,0)))
+    holoModel(22, BoneModel)
+    holoMaterial(22, SkelMat)
+    holoColor(22, BoneColor)
+    holoDisableShading(22, 1)
+    holoParent(22, 21)
+    
+    holoScale(23, JointScale)
+    holoPos(23, holoEntity(19):toWorld(vec(0,0,45)))
+    holoAng(23, holoEntity(19):toWorld(ang(0,0,-5)))
+    holoModel(23, JointModel)
+    holoMaterial(23, SkelMat)
+    holoColor(23, JointColor)
+    holoDisableShading(23, 1)
+    holoParent(23, 19)
+    
+    holoScale(24, BoneScale)
+    holoPos(24, holoEntity(23):toWorld(vec(0,0,10)))
+    holoAng(24, holoEntity(23):toWorld(ang(0,0,0)))
+    holoModel(24, BoneModel)
+    holoMaterial(24, SkelMat)
+    holoColor(24, BoneColor)
+    holoDisableShading(24, 1)
+    holoParent(24, 23)
+    
+    
+    holoScale(3000, JointScale)
+    holoPos(3000, Base:toWorld(vec(0,0,10)))
+    holoAng(3000, Base:toWorld(ang(0,0,0)))
+    holoModel(3000, JointModel)
+    holoMaterial(3000, SkelMat)
+    holoColor(3000, JointColor)
+    holoDisableShading(3000, 1)
+    holoParent(3000, Seat)
+    
+    Max=24
+    IntVal=100
+    MatDef="models/debug/debugwhite"
+    Col1=vec(255,255,255)
+    Col2=vec(175,175,175)
+    Col3=vec(45,45,45)
+    Col4=vec(15,15,15)
+    
+    Base=holoEntity(1) #= Pelvis to Neck Base
+    #holoEntity(2) #= Pelvis to Neck Base Direction indicator
+    
+    Neck_Base=holoEntity(3) #= Neck Base
+    #holoEntity(4) #= Neck Base to up Direction indicator
+    
+    R_Arm_con=holoEntity(5) #= Right Arm Connector
+    #holoEntity(6) #= Right Arm Connector Direction indicator
+    
+    L_Arm_con=holoEntity(7) #= Left Arm Connector
+    #holoEntity(8) #= Left Arm Connector Direction indicator
+    
+    Neck=holoEntity(9) #= from Neck to Head
+    #holoEntity(10) #= from Neck to Head Direction indicator
+    
+    Head=holoEntity(11) #= Head
+    #holoEntity(12) #= Head Direction indicator
+    
+    R_up_arm=holoEntity(13) #= Right UpperArm to Right Forearm
+    #holoEntity(14) #= Right UpperArm to Right Forearm Direction indicator
+    
+    L_up_arm=holoEntity(15) #= Left UpperArm to Left Forearm
+    #holoEntity(16) #= Left UpperArm to Left Forearm Direction indicator
+    
+    R_f_arm=holoEntity(17) #= Right Forearm to Right Hand
+    #holoEntity(18) #= Right Forearm to Right Hand Direction indicator
+    
+    L_f_arm=holoEntity(19) #= Left Forearm to Left Hand
+    #holoEntity(20) #= Left Forearm to Left Hand Direction indicator
+    
+    R_hand=holoEntity(21) #= Right Hand
+    #holoEntity(22) #= Right Hand Direction indicator
+    
+    L_hand=holoEntity(23) #= Left Hand
+    #holoEntity(24) #= Left Hand Direction indicator
+    
+    Pelvis=holoEntity(3000) #= Pelvis
+}
+interval(IntVal)
+W=Seat:driver():keyForward()
+A=Seat:driver():keyLeft()
+S=Seat:driver():keyBack()
+D=Seat:driver():keyRight()
+
+CamPos=holoEntity(11):toWorld(vec(0,0,0))
+
+MovementCheck=W||A||S||D
+CurPos=holoEntity(11):pos()
+TargPos=HitPos
+Ang=(TargPos-CurPos):toAngle()
+
+CurPosRight=holoEntity(13):toWorld(vec(0,0,35))
+AngRight=(TargPos-CurPosRight):toAngle()
+
+CurPosLeft=holoEntity(15):toWorld(vec(0,0,35))
+AngLeft=(TargPos-CurPosLeft):toAngle()
+if(Seat:driver()){
+    
+    Dv=Seat:driver()
+    
+    M1=Dv:keyAttack1()
+    M2=Dv:keyAttack2()
+    
+    if(Boost||Fly){
+        if(W){
+            X=-25
+            RightArmX=25
+            LeftArmX=25
+        }elseif(S){
+            X=15
+            RightArmX=-25
+            LeftArmX=-25
+        }else{
+            X=0
+            RightArmX=0
+            LeftArmX=0
+        }
+        if(A){
+            Y=-25
+            RightArmY=-25
+            LeftArmY=-10
+        }elseif(D){
+            Y=25
+            RightArmY=10
+            LeftArmY=25
+        }else{
+            Y=0
+            RightArmY=0
+            LeftArmY=0
+        }
+    }else{
+        if(W){
+            X=-5
+            RightArmX=0
+            LeftArmX=0
+        }elseif(S){
+            X=2
+            RightArmX=-0
+            LeftArmX=-0
+        }else{
+            X=0
+            RightArmX=0
+            LeftArmX=0
+        }
+        if(A){
+            Y=-5
+            RightArmY=-0
+            LeftArmY=-0
+        }elseif(D){
+            Y=5
+            RightArmY=0
+            LeftArmY=0
+        }else{
+            Y=0
+            RightArmY=0
+            LeftArmY=0
+        }
+    }
+    
+    if(M2){
+        holoAng(13, ang(AngRight:roll(),AngRight:yaw()+90,AngRight:pitch()+90))
+        holoAng(15, ang(AngLeft:roll(),AngLeft:yaw()+90,AngLeft:pitch()+90))
+        
+        holoAng(17, holoEntity(13):toWorld(ang(0,0,-5)))
+        holoAng(19, holoEntity(15):toWorld(ang(0,0,-5)))
+    }else{
+        if(Fly||Boost){
+            holoAng(13, holoEntity(5):toWorld(ang(110+RightArmY,0,10+RightArmX)))
+            holoAng(15, holoEntity(7):toWorld(ang(-110+LeftArmY,0,10+LeftArmX)))
+            
+            holoAng(17, holoEntity(13):toWorld(ang(0,0,-45)))
+            holoAng(19, holoEntity(15):toWorld(ang(0,0,-45)))
+        }else{
+            holoAng(13, holoEntity(5):toWorld(ang(110,0,10)))
+            holoAng(15, holoEntity(7):toWorld(ang(-110,0,10)))
+            
+            holoAng(17, holoEntity(13):toWorld(ang(0,0,-45)))
+            holoAng(19, holoEntity(15):toWorld(ang(0,0,-45)))
+        }
+    }
+    holoAng(1, Seat:toWorld(ang(0+Y,0,12+X)))
+    holoAng(11, ang(Ang:roll(),Ang:yaw()-90,-Ang:pitch()))
+}else{
+    holoAng(11, holoEntity(9):toWorld(ang(0,0,20)))
+}
