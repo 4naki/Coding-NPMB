@@ -1,0 +1,302 @@
+@name mechdat/npmb/NPMB V1.0
+@inputs Seat:entity EyeAng:angle Boost Base:entity MWUp MWDown
+@outputs [RPos LPos]:vector CamPos:vector CamDist Fly
+@persist [RPos LPos]:vector CheckInt Show AvrgPos:vector ApplyDown Value Fly Up Down UpDownRand LeftLegPos:vector RightLegPos:vector CamDist ReadyToUse
+
+@persist StepLength CD RLegParts LLegParts MovementSpeed Pitch TiltAng UseSounds Breathing StandHeight
+#debug values
+@outputs UpDownRand Up Down AvrgDist TestForPos:vector LegsDown
+
+#sounds
+@persist [StepSound BoostSound FlySound StopSound]:string
+interval(100)
+if(first()){
+    # Naki Portable Mech Base V1.0
+    ReadyToUse=1
+    if(Seat){
+        holoCreate(1000)
+        holoAlpha(1000, 0)
+        holoPos(1000, Seat:pos())
+        holoParent(1000, Seat)
+    holoCreate(1)#Right leg Base
+    holoCreate(2)#Left leg Base
+    
+    holoCreate(3)#Right leg Hitpos
+    holoCreate(4)#Left leg Hitpos
+    }
+    if(Base){
+        if(Seat){
+            if(ReadyToUse){
+        Seat:setPos(Base:toWorld(vec(0,0,110)))
+        Seat:setAng(ang(0,-90,0))
+        }
+        timer("check",500)
+        }
+    }    
+    Show=0
+    Width=76
+    StandHeight=100
+    
+    StepLength=95
+    StepSpeed=35
+    TiltAng=50
+    MovementSpeed=2.5
+    
+    UseSounds=1
+    
+    StepSound="npc/dog/dog_footstep3.wav"
+    BoostSound="thrusters/Rocket02.wav"
+    FlySound="thrusters/Hover01.wav"
+    StopSound="npc/combine_gunship/attack_stop2.wav"
+    
+    Breathing=0
+    
+    holoPos(1, holoEntity(1000):toWorld(vec(0,-Width/2,0)))
+    holoPos(2, holoEntity(1000):toWorld(vec(0,Width/2,0)))
+    
+    holoParent(1, holoEntity(1000))
+    holoParent(2, holoEntity(1000))
+    
+    
+    holoAlpha(1, 255*Show)
+    holoAlpha(2, 255*Show)
+    holoAlpha(3, 255*Show)
+    holoAlpha(4, 255*Show)
+    holoAlpha(1000, 255*Show)
+    holoCreate(2000)
+    holoAlpha(2000, 0)
+    CheckInt=StepSpeed*10
+    timer("Left",CheckInt)
+    
+    AvrgPos=Seat:pos()
+    
+    RightLegPos=RPos
+    LeftLegPos=LPos
+}
+if(changed(!Seat)&!Seat){
+    timer("freeze",250)
+}
+if(clk("freeze")){
+    Seat:propFreeze(1)
+    timer("unfreeze",250)
+}
+if(clk("unfreeze")){
+    Seat:propFreeze(0)
+}
+if(changed(Seat:driver():keyReload())&Seat:driver():keyReload()){
+    if(!Fly){
+        Fly=1
+    }else{
+        Fly=0
+    }
+}
+
+
+if(Breathing){
+if(Seat:driver():keyForward()==0&&Seat:driver():keyLeft()==0&&Seat:driver():keyRight()==0&&Seat:driver():keyBack()==0){
+    if(UpDownRand==30){
+        Up=0
+        Down=1
+    }
+    if(UpDownRand==0){
+        Up=1
+        Down=0
+    }
+    if(UpDownRand<30){
+        if(Up==1){
+        UpDownRand=UpDownRand+1
+    }
+    }
+    if(UpDownRand>0){
+        if(Down==1){
+        UpDownRand=UpDownRand-1
+    }
+    }
+}
+}else{
+    Up=0
+    Down=0
+}
+if(Seat:driver():keyForward()){
+    UpDownRand=0
+X=StepLength
+}elseif(Seat:driver():keyBack()){
+    UpDownRand=0
+X=-StepLength
+}else{
+X=0
+}
+if(Seat:driver():keyLeft()){
+    UpDownRand=0
+Y=StepLength
+}elseif(Seat:driver():keyRight()){
+    UpDownRand=0
+Y=-StepLength
+}else{
+Y=0
+}
+MovementCheck=Seat:driver():keyForward()||Seat:driver():keyLeft()||Seat:driver():keyRight()||Seat:driver():keyBack()
+rangerHitEntities(0)
+rangerPersist(1)
+RRanger=rangerOffset(150,holoEntity(1):toWorld(vec(X,Y,0)),vec(0,0,-1))
+rangerHitEntities(0)
+rangerPersist(1)
+LRanger=rangerOffset(150,holoEntity(2):toWorld(vec(X,Y,0)),vec(0,0,-1))
+if(changed(Boost)&Boost==0){
+    timer("Left",CheckInt)
+    timer("Right",CheckInt)
+}
+if(changed(Fly)&Fly==0){
+    timer("Left",CheckInt)
+    timer("Right",CheckInt)
+}
+if(!Fly){
+if(Boost==0){
+if(clk("Left")){
+    timer("Right",CheckInt)
+RPos=RRanger:pos()
+if(MovementCheck){
+    if(UseSounds){
+    Seat:soundPlay(1, 0, StepSound)
+    }
+}
+}
+if(clk("Right")){
+    timer("Left",CheckInt)
+LPos=LRanger:pos()
+if(MovementCheck){
+    if(UseSounds){
+    Seat:soundPlay(2, 0, StepSound)
+    }
+}
+}
+}
+}
+if(Boost==1||Fly){
+    if(!Fly){
+        ZOverwrite=1
+    }else{
+        ZOverwrite=3
+    }
+    if(Seat:driver():keyForward()){
+        X=-105
+    }elseif(Seat:driver():keyBack()){
+        X=105
+    }else{
+        X=0
+    }
+    if(Seat:driver():keyLeft()){
+        Y=-85
+    }elseif(Seat:driver():keyRight()){
+        Y=85
+    }else{
+        Y=0
+    }
+    RPos=holoEntity(1):toWorld(vec(X,Y,-80))
+    LPos=holoEntity(2):toWorld(vec(X,Y,-80))
+}else{
+    ZOverwrite=0
+}
+if(changed(Fly)&Fly){
+    if(UseSounds){
+    Seat:soundPlay(3, 0, FlySound)
+    }
+}
+if(changed(!Fly)&!Fly){
+    if(UseSounds){
+    Seat:soundPlay(3, 0, StopSound)
+    }
+}
+if(changed(!Boost)&!Boost){
+    if(UseSounds){
+    Seat:soundPlay(4, 0, StopSound)
+    }
+}
+if(changed(Boost)&Boost){
+    if(UseSounds){
+    Seat:soundPlay(4, 0, BoostSound)
+    }
+}
+if(Fly){
+    if(!Boost){
+        OverWrite=1.6
+    }
+    if(Seat:driver():keyJump()){
+        if(Boost){
+            OverWrite=2.5
+        }else{
+            OverWrite=3
+        }
+    }else{
+        OverWrite=1.6
+    }
+}else{
+    OverWrite=1
+}
+RDist=RRanger:distance()
+LDist=LRanger:distance()
+
+
+AvrgDist=(RDist+LDist)/2
+AvrgPos=(RRanger:pos()+LRanger:pos())/2
+
+if(ReadyToUse){
+Seat:propSetVelocity((TestForPos+(Seat:forward()*MovementCheck))*(1.4+MovementSpeed)*(1+ZOverwrite*2))
+}
+TestForPos=-(Seat:pos()-(AvrgPos+vec(0,0,StandHeight*OverWrite+(UpDownRand*0.2))))
+Seat:propGravity(0)
+
+holoPos(3, RPos)#Right Leg Hitpos
+holoPos(4, LPos)#Left Leg Hitpos
+
+if(Seat:driver()){
+    
+if(Boost==1){
+if(Seat:driver():keyForward()){
+Pitch=TiltAng
+}elseif(Seat:driver():keyBack()){
+Pitch=-TiltAng
+}else{
+Pitch=0
+}
+if(Seat:driver():keyLeft()){
+Roll=TiltAng
+}elseif(Seat:driver():keyRight()){
+Roll=-TiltAng
+}else{
+Roll=0
+}
+}else{
+Pitch=0
+Roll=0
+}
+if(!Seat:driver():keyAttack2()){
+    Pitch2=Pitch*0.25
+    Roll2=Roll*0.25
+}else{
+    Pitch2=EyeAng:pitch()
+    Roll2=Roll*0.25
+}
+CamPos=Seat:toWorld(vec(0,-5,32+CamDist/4))
+holoAng(2000,ang(0,-90+EyeAng:yaw(),0))
+Seat:setAng(holoEntity(2000):toWorld(ang(-Roll2,0,-Pitch2)))
+
+if(changed(MWUp)&MWUp){
+    CD=CD-5
+}
+
+if(changed(MWDown)&MWDown){
+    CD=CD+5
+}
+CamDist=CD
+}
+
+else{
+Pitch=0
+Seat:setAng(ang(0,-90,0))
+}
+
+if(dupefinished()){
+    reset()
+}
+
