@@ -65,3 +65,15 @@ also when copying the mech copy the whole mech before changing this value, just 
 even tho this setup is quite long, it still is worth it, this base works as a gundam base or armored core base
 
 until i update the e2s do not hit a wall, it breaks the mech momentarely, to fix this grab the seat with physics gun and freeze it, then unfreeze it againg
+
+
+#controls
+
+WASD to move
+Space to go up in fly mode
+Shift (held down) to use glide mode
+Mouse2 for aiming, mixed with fly mode you can fly to the direction you are aiming at
+Mouse1 shoots if you have wired anything to them ofc
+
+R toggles fly mode
+
