@@ -1,0 +1,65 @@
+First what you want to do is to spawn a chair, the skeleton base e2 and the actual base e2, npmb v1.0 by naki
+
+spawn a pod controller and a cam controller
+
+cam settings below:
+
+local coordinates: uncheck
+client side movement: check
+free movement: uncheck
+cl movement local to parent: uncheck
+client side zooming: uncheck
+auto unclip: uncheck
+draw player: uncheck
+draw parent: check
+
+Wire options:
+
+From Cam Controller:
+Activated to pod controller active
+Position to Base E2 CamPos
+Distance to Base E2 CamDist
+Parent to seat
+
+From Base E2:
+Seat to seat
+EyeAng to cam controller CamAng
+Boost to pod controller shift
+Base to a base plate spawned on ground, the mech spawns on it and works as a respawnpoint when you reload the e2
+MWUp to pod controller PrevWeapon
+MWDown to pod controller NextWeapon
+
+From Pod Controller:
+Crosshairs and hide player to active
+
+From Skeleton Base E2:
+Seat to seat
+HitPos to cam controller HitPos
+Boost to pod controller shift
+Fly to Base E2 Fly
+RSegA,B,C and Foot goes to right ik leg e2's representive outputs if you have the edited e2 of shadowscion, those options are listed in the other readme file
+same for LSegA,B,C and Foot
+
+From Model Base E2:
+Base to seat and everything else except leg parts go to the Skeleton Base E2
+
+From Weaponizer:
+R and L _hand goes to the Skeleton Base E2
+
+GunR and L goes to the weapons that you want to use
+
+From IK Leg E2s
+right side Target to RPos in Base E2
+left side Target to LPos in Base E2
+
+#End of wiring
+
+if you have everything wired, what you want to do is to move the leg e2s next to the seat above the locations where the leg joints start, this way they won't hit the rangers if they were to hit entities, 
+multiparent them to the seat
+
+now if you have done everything correctly, you can now open the base e2 and go to line
+15 and change the ReadyToUse=0 to ReadyToUse=1
+
+also when copying the mech copy the whole mech before changing this value, just to be sure that it won't break
+
+even tho this setup is quite long, it still is worth it, this base works as a gundam base or armored core base
