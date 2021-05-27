@@ -12,7 +12,7 @@
 interval(100)
 if(first()){
     # Naki Portable Mech Base V1.0
-    ReadyToUse=1
+    ReadyToUse=0
     if(Seat){
         holoCreate(1000)
         holoAlpha(1000, 0)
@@ -277,7 +277,7 @@ if(!Seat:driver():keyAttack2()){
     Pitch2=EyeAng:pitch()
     Roll2=Roll*0.25
 }
-CamPos=Seat:toWorld(vec(0,-5,32+CamDist/4))
+CamPos=Seat:toWorld(vec(0,-5,32+CamDist*2))
 holoAng(2000,ang(0,-90+EyeAng:yaw(),0))
 Seat:setAng(holoEntity(2000):toWorld(ang(-Roll2,0,-Pitch2)))
 
