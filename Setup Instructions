@@ -54,6 +54,8 @@ left side Target to LPos in Base E2
 
 #End of wiring
 
+models/sprops/rectangles/size_6/rect_96x96x3.mdl works as a great base plate
+
 if you have everything wired, what you want to do is to move the leg e2s next to the seat above the locations where the leg joints start, this way they won't hit the rangers if they were to hit entities, 
 multiparent them to the seat
 
