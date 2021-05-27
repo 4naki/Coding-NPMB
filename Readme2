@@ -1,0 +1,25 @@
+This repository contains all needed files for my mech e2,
+
+Big thanks to ClockEFFX, for getting me started in this project and coding e2 mechs overall
+Thanks to shadowscion for coding the ik legs which can be found in here
+
+https://github.com/shadowscion/Expression2-Releases/blob/master/olderstuff/ik/humanoid/three_seg_digi.txt
+
+#Edit
+
+@outputs [LSegA LSegB LSegC LFoot]:entity
+@persist [SegmentLengthA SegmentLengthB SegmentLengthC] Entity:entity [SegA SegB SegC Foot]:entity
+
+SegmentLengthA = 45
+SegmentLengthB = 35 * 1.0357142857143	
+SegmentLengthC = 60 * 0.60714285714286
+
+#Add these after line 67
+
+LSegA=holoEntity(2)
+LSegB=holoEntity(3)
+LSegC=holoEntity(4)
+LFoot=holoEntity(5)
+
+
+#Edit stop
