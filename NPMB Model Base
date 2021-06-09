@@ -47,6 +47,7 @@ if(clk("holoLoad")){
     
     print("First Part")
     timer("holosloaded",500)
+}
 if(clk("holosloaded")){
     print("holos loaded")
 }
